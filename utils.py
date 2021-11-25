@@ -1,6 +1,7 @@
 from scipy import misc
-import os, cv2, torch
+import os, torch
 import numpy as np
+import skimage.io
 
 def load_test_data(image_path, size=256):
     img = misc.imread(image_path, mode='RGB')
