@@ -13,6 +13,7 @@ import numpy
 import os
 import skimage.io
 import sys
+from skimage.metrics import structural_similarity as SSIM
 
 
 sys.path.append(os.path.join("..", "util"))
@@ -438,20 +439,22 @@ class NICE(object) :
         self.gen2B.eval(), self.gen2A.eval()
 
         test_ids_t = common_pelvic.load_data_ids(self.data_dir, "testing", "treat")
-        test_data_s, test_data_t, _, _ = common_pelvic.load_test_data(self.data_dir, mini=self.mini)
+        test_data_s, test_data_t, _, _ = common_pelvic.load_test_data(self.data_dir, valid=True)
 
-        test_st_psnr = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
-        test_ts_psnr = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
+        test_st_psnr = numpy.zeros((len(test_data_s), 1), numpy.float32)
+        test_ts_psnr = numpy.zeros((len(test_data_t), 1), numpy.float32)
+        test_st_ssim = numpy.zeros((len(test_data_s), 1), numpy.float32)
+        test_ts_ssim = numpy.zeros((len(test_data_t), 1), numpy.float32)
         test_st_list = []
         test_ts_list = []
         with torch.no_grad():
-            for i in range(test_data_s.shape[0]):
-                test_st = numpy.zeros(test_data_s.shape[1:], numpy.float32)
-                test_ts = numpy.zeros(test_data_t.shape[1:], numpy.float32)
-                used = numpy.zeros(test_data_s.shape[1:], numpy.float32)
-                for j in range(test_data_s.shape[1] - self.img_ch + 1):
-                    test_patch_s = torch.tensor(test_data_s[i:i + 1, j:j + self.img_ch, :, :], device=self.device)
-                    test_patch_t = torch.tensor(test_data_t[i:i + 1, j:j + self.img_ch, :, :], device=self.device)
+            for i in range(len(test_data_s)):
+                test_st = numpy.zeros(test_data_s[i].shape, numpy.float32)
+                test_ts = numpy.zeros(test_data_t[i].shape, numpy.float32)
+                used = numpy.zeros(test_data_s[i].shape, numpy.float32)
+                for j in range(test_data_s[i].shape[0] - self.img_ch + 1):
+                    test_patch_s = torch.tensor(numpy.expand_dims(test_data_s[i][j:j + self.img_ch, :, :], 0), device=self.device)
+                    test_patch_t = torch.tensor(numpy.expand_dims(test_data_t[i][j:j + self.img_ch, :, :], 0), device=self.device)
 
                     _, _, _, _, z_s = self.disA(test_patch_s)
                     _, _, _, _, z_t = self.disB(test_patch_t)
@@ -467,19 +470,26 @@ class NICE(object) :
                 test_st /= used
                 test_ts /= used
 
+                """
                 if self.result_dir:
                     common_pelvic.save_nii(test_ts, os.path.join(self.result_dir, "syn_%s.nii.gz" % test_ids_t[i]))
+                """
 
                 st_psnr = common_metrics.psnr(test_st, test_data_t[i])
                 ts_psnr = common_metrics.psnr(test_ts, test_data_s[i])
+                st_ssim = SSIM(test_st, test_data_t[i])
+                ts_ssim = SSIM(test_ts, test_data_s[i])
 
                 test_st_psnr[i] = st_psnr
                 test_ts_psnr[i] = ts_psnr
+                test_st_ssim[i] = st_ssim
+                test_ts_ssim[i] = ts_ssim
                 test_st_list.append(test_st)
                 test_ts_list.append(test_ts)
 
-        msg = "  test_st_psnr:%f/%f  test_ts_psnr:%f/%f" % \
-              (test_st_psnr.mean(), test_st_psnr.std(), test_ts_psnr.mean(), test_ts_psnr.std())
+        msg = "test_st_psnr:%f/%f  test_st_ssim:%f/%f  test_ts_psnr:%f/%f  test_ts_ssim:%f/%f" % \
+              (test_st_psnr.mean(), test_st_psnr.std(), test_st_ssim.mean(), test_st_ssim.std(),
+               test_ts_psnr.mean(), test_ts_psnr.std(), test_ts_ssim.mean(), test_ts_ssim.std())
         print(msg)
 
         if self.result_dir:
@@ -488,3 +498,5 @@ class NICE(object) :
 
             numpy.save(os.path.join(self.result_dir, "st_psnr.npy"), test_st_psnr)
             numpy.save(os.path.join(self.result_dir, "ts_psnr.npy"), test_ts_psnr)
+            numpy.save(os.path.join(opts.output_dir, "st_ssim.npy"), test_st_ssim)
+            numpy.save(os.path.join(opts.output_dir, "ts_ssim.npy"), test_ts_ssim)
