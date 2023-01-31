@@ -498,5 +498,5 @@ class NICE(object) :
 
             numpy.save(os.path.join(self.result_dir, "st_psnr.npy"), test_st_psnr)
             numpy.save(os.path.join(self.result_dir, "ts_psnr.npy"), test_ts_psnr)
-            numpy.save(os.path.join(opts.output_dir, "st_ssim.npy"), test_st_ssim)
-            numpy.save(os.path.join(opts.output_dir, "ts_ssim.npy"), test_ts_ssim)
+            numpy.save(os.path.join(self.result_dir, "st_ssim.npy"), test_st_ssim)
+            numpy.save(os.path.join(self.result_dir, "ts_ssim.npy"), test_ts_ssim)
