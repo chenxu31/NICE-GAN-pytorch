@@ -13,10 +13,15 @@ import numpy
 import os
 import skimage.io
 import sys
+import platform
 from skimage.metrics import structural_similarity as SSIM
 
 
-sys.path.append(r"E:\我的坚果云\sourcecode\python\util")
+if platform.system() == 'Windows':
+    sys.path.append(r"E:\我的坚果云\sourcecode\python\util")
+else:
+    sys.path.append(r"/home/chenxu/我的坚果云/sourcecode/python/util")
+
 import common_metrics
 import common_brats
 
