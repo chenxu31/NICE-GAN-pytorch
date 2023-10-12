@@ -70,10 +70,6 @@ class NICE(object) :
 
         self.do_validation = args.do_validation
         self.psnr_threshold = args.psnr_threshold
-        self.aug_sigma = args.aug_sigma
-        self.aug_points = args.aug_points
-        self.aug_rotate = args.aug_rotate
-        self.aug_zoom = args.aug_zoom
 
         if args.gpu >= 0:
             os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
