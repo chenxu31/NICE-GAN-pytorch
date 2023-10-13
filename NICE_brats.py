@@ -406,17 +406,13 @@ class NICE(object) :
                     val_patch_s = torch.tensor(self.val_data_s[i:i + 1, j:j + self.img_ch, :, :], device=self.device)
                     val_patch_t = torch.tensor(self.val_data_t[i:i + 1, j:j + self.img_ch, :, :], device=self.device)
 
-                    if val_patch_s.max() <= -1.:
-                        ret_st = val_patch_s[0].cpu().detach().numpy()[0]
-                    else:
-                        _, _, _, _, z_s = self.disA(val_patch_s)
-                        ret_st = self.gen2B(z_s)[0].cpu().detach().numpy()[0]
+                    _, _, _, _, z_s = self.disA(val_patch_s)
+                    _, _, _, _, z_t = self.disB(val_patch_t)
+                    ret_st = self.gen2B(z_s)[0].cpu().detach().numpy()[0]
+                    ret_ts = self.gen2A(z_t)[0].cpu().detach().numpy()[0]
 
-                    if val_patch_t.max() <= -1.:
-                        ret_ts = val_patch_t[0].cpu().detach().numpy()[0]
-                    else:
-                        _, _, _, _, z_t = self.disB(val_patch_t)
-                        ret_ts = self.gen2A(z_t)[0].cpu().detach().numpy()[0]
+                    if True in numpy.isnan(ret_st) or True in numpy.isnan(ret_ts):
+                        pdb.set_trace()
 
                     val_st[j:j + self.img_ch, :, :] += ret_st
                     val_ts[j:j + self.img_ch, :, :] += ret_ts
