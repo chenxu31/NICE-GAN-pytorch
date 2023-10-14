@@ -443,12 +443,12 @@ class NICE(object) :
 
         test_data_t, test_data_s = common_brats.load_test_data(self.data_dir, "test")
 
-        test_st_psnr = numpy.zeros((len(test_data_s), 1), numpy.float32)
-        test_ts_psnr = numpy.zeros((len(test_data_t), 1), numpy.float32)
-        test_st_ssim = numpy.zeros((len(test_data_s), 1), numpy.float32)
-        test_ts_ssim = numpy.zeros((len(test_data_t), 1), numpy.float32)
-        test_st_mae = numpy.zeros((len(test_data_s), 1), numpy.float32)
-        test_ts_mae = numpy.zeros((len(test_data_t), 1), numpy.float32)
+        test_st_psnr = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
+        test_ts_psnr = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
+        test_st_ssim = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
+        test_ts_ssim = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
+        test_st_mae = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
+        test_ts_mae = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
         test_st_list = []
         test_ts_list = []
         with torch.no_grad():
