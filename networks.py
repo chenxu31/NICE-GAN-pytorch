@@ -64,8 +64,7 @@ class ResnetGenerator(nn.Module):
                          ]
 
         UpBlock2 += [nn.ReflectionPad2d(3),
-                     nn.Conv2d(ngf, output_nc, kernel_size=7, stride=1, padding=0, bias=False),
-                     nn.Tanh()]
+                     nn.Conv2d(ngf, output_nc, kernel_size=7, stride=1, padding=0, bias=False)]
 
         self.FC = nn.Sequential(*FC)
         self.UpBlock0 = nn.Sequential(*UpBlock0)
@@ -86,6 +85,8 @@ class ResnetGenerator(nn.Module):
             x = getattr(self, 'UpBlock1_' + str(i+1))(x, gamma, beta)
 
         out = self.UpBlock2(x)
+
+        out = torch.clamp(out, 1., -1.)
 
         return out
 
