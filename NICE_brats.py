@@ -270,6 +270,9 @@ class NICE(object) :
                 # writer.add_scalar('D/%s' % 'loss_A', D_loss_A.data.cpu().numpy(), global_step=step)
                 # writer.add_scalar('D/%s' % 'loss_B', D_loss_B.data.cpu().numpy(), global_step=step)
 
+                if True in torch.isnan(self.disA.model[1].weight) or True in torch.isnan(self.disB.model[1].weight):
+                    pdb.set_trace()
+
                 # Update G
                 self.G_optim.zero_grad()
 
