@@ -86,7 +86,7 @@ class ResnetGenerator(nn.Module):
 
         out = self.UpBlock2(x)
 
-        out = torch.clamp(out, 1., -1.)
+        out = torch.clamp(out, -1., 1.)
 
         return out
 
