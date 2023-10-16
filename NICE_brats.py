@@ -313,6 +313,9 @@ class NICE(object) :
                 Generator_loss = G_loss_A + G_loss_B
                 Generator_loss.backward()
                 self.G_optim.step()
+
+                if True in torch.isnan(self.gen2B.UpBlock0[1].weight) or True in torch.isnan(self.gen2A.UpBlock0[1].weight):
+                    pdb.set_trace()
                 # writer.add_scalar('G/%s' % 'loss_A', G_loss_A.data.cpu().numpy(), global_step=step)
                 # writer.add_scalar('G/%s' % 'loss_B', G_loss_B.data.cpu().numpy(), global_step=step)
 
