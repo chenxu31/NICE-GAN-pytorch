@@ -1,0 +1,71 @@
+(base) chenxu@chenxu-Z690-UD-DDR4:~/github/NICE-GAN-pytorch$ python main_brats.py --gpu 0 --data_dir /home/chenxu/datasets/brats/h5_data --checkpoint_dir /home/chenxu/training/checkpoints/nicegan/brats --batch_size 4 --light True
+
+##### Information #####
+# light :  True
+# batch_size :  4
+# iteration per epoch :  100
+# the size of image :  240
+# the size of image channel :  3
+# base channel number per layer :  64
+
+##### Generator #####
+# residual blocks :  6
+
+##### Discriminator #####
+# discriminator layers :  7
+
+##### Weight #####
+# adv_weight :  1
+# cycle_weight :  10
+# recon_weight :  10
+-----------------------------------------------
+[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv2d'>.
+[INFO] Register count_relu() for <class 'torch.nn.modules.activation.LeakyReLU'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.container.Sequential'>.
+[Network disA] Total number of parameters:  93.749M
+[Network disA] Total number of FLOPs:  9.935G
+-----------------------------------------------
+[INFO] Register zero_ops() for <class 'torch.nn.modules.activation.ReLU'>.
+[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv2d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.container.Sequential'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pixelshuffle.PixelShuffle'>.
+[Network gen2B] Total number of parameters:  16.192M
+[Network gen2B] Total number of FLOPs:  59.359G
+-----------------------------------------------
+training start !
+[    1/  100] time: 3553.6701 d_loss: 2.94288349, g_loss: 2.91225529  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.483236/0.679161  val_ts_psnr:21.680515/0.735493  best_ts_psnr:21.680515
+[    2/  100] time: 7122.7451 d_loss: 2.68788815, g_loss: 2.95881486  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:21.947395/0.673056  val_ts_psnr:22.134764/0.676028  best_ts_psnr:22.134764
+[    3/  100] time: 10691.2457 d_loss: 2.71997261, g_loss: 3.44586897  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.070995/0.746117  val_ts_psnr:21.889914/0.625683  best_ts_psnr:22.134764
+[    4/  100] time: 14258.2423 d_loss: 2.46911883, g_loss: 3.05877805  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.577374/0.643491  val_ts_psnr:21.892294/0.520241  best_ts_psnr:22.134764
+[    5/  100] time: 17825.3744 d_loss: 2.30159235, g_loss: 3.65335417  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.803850/0.654426  val_ts_psnr:21.486074/0.516849  best_ts_psnr:22.134764
+[    6/  100] time: 21392.3404 d_loss: 2.81584215, g_loss: 3.12134457  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.160212/0.581651  val_ts_psnr:21.994818/0.704826  best_ts_psnr:22.134764
+[    7/  100] time: 24959.2134 d_loss: 2.35638475, g_loss: 3.64347029  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.517920/0.695256  val_ts_psnr:22.475567/0.608376  best_ts_psnr:22.475567
+[    8/  100] time: 28527.8199 d_loss: 2.40884018, g_loss: 3.87691188  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.073263/0.636081  val_ts_psnr:22.073483/0.690287  best_ts_psnr:22.475567
+[    9/  100] time: 32095.4529 d_loss: 2.66723228, g_loss: 3.15746641  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.670660/0.543055  val_ts_psnr:21.826828/0.768354  best_ts_psnr:22.475567
+[   10/  100] time: 35663.0441 d_loss: 2.18011999, g_loss: 3.56319189  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.791992/0.716665  val_ts_psnr:22.304298/0.694724  best_ts_psnr:22.475567
+[   11/  100] time: 39230.6398 d_loss: 2.81972742, g_loss: 3.16247749  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.998148/0.855324  val_ts_psnr:21.681103/0.665205  best_ts_psnr:22.475567
+[   12/  100] time: 42798.2859 d_loss: 2.26024508, g_loss: 3.24924493  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.996605/0.795735  val_ts_psnr:22.442703/0.716096  best_ts_psnr:22.475567
+[   13/  100] time: 46365.6567 d_loss: 2.30931735, g_loss: 3.32533216  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.981510/0.728350  val_ts_psnr:22.414539/0.653055  best_ts_psnr:22.475567
+[   14/  100] time: 49933.0480 d_loss: 2.54266119, g_loss: 3.08148003  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.937119/0.710944  val_ts_psnr:22.327301/0.633168  best_ts_psnr:22.475567
+[   15/  100] time: 53500.4648 d_loss: 2.41992116, g_loss: 3.83491516  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.951653/0.939593  val_ts_psnr:21.922197/0.784958  best_ts_psnr:22.475567
+[   16/  100] time: 57067.6654 d_loss: 2.24366426, g_loss: 3.66934824  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.670010/0.700585  val_ts_psnr:22.545887/0.614799  best_ts_psnr:22.545887
+[   17/  100] time: 60635.9920 d_loss: 2.56030679, g_loss: 2.87206984  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.161535/0.900263  val_ts_psnr:22.355051/0.696956  best_ts_psnr:22.545887
+[   18/  100] time: 64202.8798 d_loss: 2.41655159, g_loss: 3.27224588  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.331158/0.860632  val_ts_psnr:22.430138/0.681112  best_ts_psnr:22.545887
+[   19/  100] time: 67770.4539 d_loss: 2.12992501, g_loss: 3.61484814  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.142643/0.842771  val_ts_psnr:22.135962/0.662684  best_ts_psnr:22.545887
+[   20/  100] time: 71338.0139 d_loss: 2.42811489, g_loss: 3.65880322  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.867662/0.724945  val_ts_psnr:21.955223/0.655454  best_ts_psnr:22.545887
+[   21/  100] time: 74905.7499 d_loss: 2.29936814, g_loss: 3.33515978  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.869646/0.865407  val_ts_psnr:22.387339/0.647120  best_ts_psnr:22.545887
+[   22/  100] time: 78472.9561 d_loss: 2.12261438, g_loss: 3.75512838  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.999716/0.908587  val_ts_psnr:22.366446/0.778226  best_ts_psnr:22.545887
+[   23/  100] time: 82220.9740 d_loss: 2.28697348, g_loss: 3.87026381  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.589367/0.947593  val_ts_psnr:22.211828/0.602725  best_ts_psnr:22.545887
+[   24/  100] time: 85785.0312 d_loss: 2.49267340, g_loss: 3.44330454  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.386248/0.922346  val_ts_psnr:22.130939/0.790580  best_ts_psnr:22.545887
+[   25/  100] time: 89349.3618 d_loss: 2.80609369, g_loss: 3.32988787  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.134312/0.943422  val_ts_psnr:22.437225/0.766745  best_ts_psnr:22.545887
+[   26/  100] time: 92915.7655 d_loss: 2.70484304, g_loss: 3.50559855  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.917650/0.811240  val_ts_psnr:22.425512/0.771642  best_ts_psnr:22.545887
+[   27/  100] time: 96482.0428 d_loss: 2.16751575, g_loss: 3.59574723  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.067818/0.884915  val_ts_psnr:22.334854/0.576397  best_ts_psnr:22.545887
+[   28/  100] time: 100054.8236 d_loss: 2.29215145, g_loss: 3.78380060  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.839098/0.864660  val_ts_psnr:22.726048/0.790324  best_ts_psnr:22.726048
+[   29/  100] time: 103620.4634 d_loss: 2.27343369, g_loss: 3.79187989  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.961641/0.853696  val_ts_psnr:22.436640/0.655358  best_ts_psnr:22.726048
+[   30/  100] time: 107183.9211 d_loss: 2.33051157, g_loss: 3.45444798  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.003292/0.902113  val_ts_psnr:22.446499/0.638043  best_ts_psnr:22.726048
+[   31/  100] time: 110747.1428 d_loss: 2.78133249, g_loss: 3.90578842  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.938120/0.870232  val_ts_psnr:22.690380/0.728005  best_ts_psnr:22.726048
+[   32/  100] time: 114310.6158 d_loss: 2.21199512, g_loss: 4.02486753  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:22.938185/0.852792  val_ts_psnr:22.367847/0.664104  best_ts_psnr:22.726048
+[   33/  100] time: 117873.4640 d_loss: 2.52029753, g_loss: 3.76361561  current D_learning rate:0.0001  current G_learning rate:0.0001  val_st_psnr:23.038313/0.869067  val_ts_psnr:22.270124/0.709358  best_ts_psnr:22.726048
+
