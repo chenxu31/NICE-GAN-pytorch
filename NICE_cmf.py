@@ -150,7 +150,7 @@ class NICE(object) :
         """
         aug_para = {}
 
-        self.data_iter = common_cmf.DataIterUnpaired(self.data_dir, device, patch_depth=self.img_ch,
+        self.data_iter = common_cmf.DataIterUnpaired(self.data_dir, self.device, patch_depth=self.img_ch,
                                                      batch_size=self.batch_size)
         if self.do_validation:
             self.val_data_t, self.val_data_s, _ = common_cmf.load_test_data(self.data_dir)
