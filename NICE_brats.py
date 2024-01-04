@@ -388,7 +388,7 @@ class NICE(object) :
         torch.save(params, os.path.join(self.result_dir, self.dataset + path_g))
 
     def load(self):
-        params = torch.load(os.path.join(self.checkpoint_dir, 'params_final.pt'))
+        params = torch.load(os.path.join(self.checkpoint_dir, 'params_best.pt'))
         self.gen2B.load_state_dict(params['gen2B'])
         self.gen2A.load_state_dict(params['gen2A'])
         self.disA.load_state_dict(params['disA'])
@@ -485,10 +485,10 @@ class NICE(object) :
 
                 st_psnr = common_metrics.psnr(test_st, test_data_t[i])
                 ts_psnr = common_metrics.psnr(test_ts, test_data_s[i])
-                st_ssim = SSIM(test_st, test_data_t[i])
-                ts_ssim = SSIM(test_ts, test_data_s[i])
-                st_mae = abs(test_st - test_data_t[i])
-                ts_mae = abs(test_ts - test_data_s[i])
+                st_ssim = SSIM(test_st, test_data_t[i], data_range=2.)
+                ts_ssim = SSIM(test_ts, test_data_s[i], data_range=2.)
+                st_mae = abs(test_st - test_data_t[i]).mean()
+                ts_mae = abs(test_ts - test_data_s[i]).mean()
 
                 test_st_psnr[i] = st_psnr
                 test_ts_psnr[i] = ts_psnr
