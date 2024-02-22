@@ -358,6 +358,7 @@ class NICE(object) :
                 msg += "  best_ts_psnr:%f" % best_psnr
 
                 print(msg)
+                sys.stdout.flush()
 
         self.save("final")
 
