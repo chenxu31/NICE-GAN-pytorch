@@ -146,12 +146,12 @@ class NICE(object) :
         """
 
         dataset_s = common_ixi.Dataset(self.data_dir, modality="t2", n_slices=self.img_ch, debug=self.debug)
-        dataset_t = common_ixi.Dataset(self.data_dir, modality="t1", n_slices=self.img_ch, debug=self.debug)
+        dataset_t = common_ixi.Dataset(self.data_dir, modality="pd", n_slices=self.img_ch, debug=self.debug)
         self.dataloader_s = torch.utils.data.DataLoader(dataset_s, batch_size=self.batch_size, shuffle=True, pin_memory=True, drop_last=True)
         self.dataloader_t = torch.utils.data.DataLoader(dataset_t, batch_size=self.batch_size, shuffle=True, pin_memory=True, drop_last=True)
 
         if self.do_validation:
-            self.val_data_t, self.val_data_s = common_ixi.load_test_data(self.data_dir, "val")
+            self.val_data_s, self.val_data_t = common_ixi.load_test_data(self.data_dir, "val")
 
         """ Define Generator, Discriminator """
         self.gen2B = ResnetGenerator(input_nc=self.img_ch, output_nc=self.img_ch, ngf=self.ch, n_blocks=self.n_res, img_size=self.img_size, light=self.light).to(self.device)
@@ -444,7 +444,7 @@ class NICE(object) :
 
         self.gen2B.eval(), self.gen2A.eval()
 
-        test_data_t, test_data_s = common_ixi.load_test_data(self.data_dir, "test")
+        test_data_s, test_data_t = common_ixi.load_test_data(self.data_dir, "test")
 
         test_st_psnr = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
         test_ts_psnr = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
